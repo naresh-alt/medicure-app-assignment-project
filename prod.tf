@@ -115,14 +115,14 @@ Name = "proj-sg1"
 # Creating a new network interface
 resource "aws_network_interface" "proj-ni" {
 subnet_id = aws_subnet.proj-subnet.id
-private_ips = ["10.0.1.10"]
+private_ips = ["10.0.1.11"]
 security_groups = [aws_security_group.proj-sg.id]
 }
 # Attaching an elastic IP to the network interface
 resource "aws_eip" "proj-eip" {
 domain = "vpc"
 network_interface = aws_network_interface.proj-ni.id
-associate_with_private_ip = "10.0.1.10"
+associate_with_private_ip = "10.0.1.11"
 }
 # Creating an Ubuntu EC2 instance
 resource "aws_instance" "proj-instance" {
@@ -142,6 +142,6 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 EOF
 tags = {
-Name = "test-server"
+Name = "prod-server"
 }
 }
